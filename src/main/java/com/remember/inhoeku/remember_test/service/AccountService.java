@@ -15,7 +15,7 @@ public class AccountService {
 	@Autowired
 	AccountDAOFactory accountDAOFactory;
 
-	public AccountVO register(RegisterDTO registerDTO) {
+	public int register(RegisterDTO registerDTO) {
 
 		AccountDAOInt accountDAO = accountDAOFactory.getDAO(registerDTO.getAccountType());
 
@@ -33,7 +33,7 @@ public class AccountService {
 			throw new RuntimeException("Email registerFail");
 		}
 
-		return accountDAO.getAccountByEmail(registerDTO.getEmail());
+		 return accountDAO.getAccountByEmail(registerDTO.getEmail()).getPK();
 	}
 
 	private boolean isEmailExsist(RegisterDTO registerDTO) {
