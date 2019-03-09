@@ -1,6 +1,7 @@
 package com.remember.inhoeku.remember_test.service;
 
-import com.remember.inhoeku.remember_test.dao.AccountDAOInt;
+import com.remember.inhoeku.remember_test.dao.AccountDAO;
+import com.remember.inhoeku.remember_test.domain.dto.LoginDTO;
 import com.remember.inhoeku.remember_test.domain.dto.RegisterDTO;
 import com.remember.inhoeku.remember_test.domain.error.BusinessException;
 import com.remember.inhoeku.remember_test.domain.vo.AccountVO;
@@ -17,7 +18,7 @@ public class AccountService {
 
 	public int register(RegisterDTO registerDTO) {
 
-		AccountDAOInt accountDAO = accountDAOFactory.getDAO(registerDTO.getAccountType());
+		AccountDAO accountDAO = accountDAOFactory.getDAO(registerDTO.getAccountType());
 
 		// 이메일 체크
 		if (isEmailExsist(registerDTO)) {
@@ -37,7 +38,7 @@ public class AccountService {
 	}
 
 	private boolean isEmailExsist(RegisterDTO registerDTO) {
-		AccountDAOInt accountDAO = accountDAOFactory.getDAO(registerDTO.getAccountType());
+		AccountDAO accountDAO = accountDAOFactory.getDAO(registerDTO.getAccountType());
 
 		AccountVO accountVO;
 		accountVO = accountDAO.getAccountByEmail(registerDTO.getEmail());

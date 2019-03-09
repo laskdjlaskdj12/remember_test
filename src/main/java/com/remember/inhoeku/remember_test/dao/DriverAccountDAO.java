@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class DriverAccountDAO implements AccountDAOInt{
+public class DriverAccountDAO implements AccountDAO {
 	@Autowired
 	JdbcTemplate jdbcTemplate;
 

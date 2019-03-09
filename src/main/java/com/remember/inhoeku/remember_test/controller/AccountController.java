@@ -1,5 +1,6 @@
 package com.remember.inhoeku.remember_test.controller;
 
+import com.remember.inhoeku.remember_test.domain.dto.LoginDTO;
 import com.remember.inhoeku.remember_test.domain.dto.RegisterDTO;
 import com.remember.inhoeku.remember_test.domain.vo.AccountVO;
 import com.remember.inhoeku.remember_test.service.AccountService;

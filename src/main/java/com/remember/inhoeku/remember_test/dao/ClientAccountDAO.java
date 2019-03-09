@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class ClientAccountDAO implements AccountDAOInt{
+public class ClientAccountDAO implements AccountDAO {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
