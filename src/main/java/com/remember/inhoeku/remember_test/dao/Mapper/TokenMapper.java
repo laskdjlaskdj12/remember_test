@@ -13,7 +13,7 @@ public class TokenMapper implements RowMapper<TokenVO> {
 		TokenVO tokenVO = new TokenVO();
 		tokenVO.setPK(rs.getInt("PK"));
 		tokenVO.setUpdateDate(rs.getTimestamp("updateDate"));
-		tokenVO.setExpireDate(rs.getTime("expireDate"));
+		tokenVO.setExpireDate(rs.getTimestamp("expireDate"));
 		tokenVO.setToken(rs.getString("token"));
 		tokenVO.setClientPK(rs.getInt("clientPK"));
 		tokenVO.setDriverPK(rs.getInt("driverPK"));
