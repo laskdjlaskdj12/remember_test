@@ -44,4 +44,9 @@ public class TokenDAO {
 		}
 		return tokenVOList.get(0);
 	}
+
+	public int removeTokenByPK(int pk) {
+		String sql = "DELETE FROM token WHERE PK = ?";
+		return jdbcTemplate.update(sql, pk);
+	}
 }

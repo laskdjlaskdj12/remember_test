@@ -22,8 +22,9 @@ public class TokenDAOTest {
 	@Test
 	public void insertTokenTest(){
 		//반드시 Token Table에서 지우고 테스트를 할것
+		int testAccountPK = 6;
 		AccountVO accountVO = new AccountVO();
-		accountVO.setPK(5);
+		accountVO.setPK(testAccountPK);
 		accountVO.setAccountType(ACCOUNT_TYPE.PASSENGER);
 
 		String token = changeToHash("laskdjlaskdj1234");
@@ -37,8 +38,11 @@ public class TokenDAOTest {
 
 	@Test
 	public void getTokenByAccountPK(){
+		//반드시 Account PK가 clientAccount 테이블에 있어야할것
+		int testAccountPK = 6;
+
 		AccountVO accountVO = new AccountVO();
-		accountVO.setPK(5);
+		accountVO.setPK(testAccountPK);
 		accountVO.setAccountType(ACCOUNT_TYPE.PASSENGER);
 
 		TokenVO tokenVO = tokenDAO.getTokenByAccountPK(5, accountVO.getAccountType());
@@ -58,12 +62,25 @@ public class TokenDAOTest {
 
 	@Test
 	public void getTokenNotExsistPK() {
+		//반드시 Account PK가 clientAccount 테이블에 없어야할것
+
+		int testAccountPK = 4;
+
 		AccountVO accountVO = new AccountVO();
-		accountVO.setPK(4);
+		accountVO.setPK(testAccountPK);
 		accountVO.setAccountType(ACCOUNT_TYPE.PASSENGER);
 
 		TokenVO tokenVO = tokenDAO.getTokenByAccountPK(accountVO.getPK(), accountVO.getAccountType());
 		Assert.assertNull(tokenVO);
+	}
+
+	@Test
+	public void deleteTokenByPK(){
+		//반드시 Account PK가 clientAccount 테이블에 있어야할것
+		int tokenPK = 5;
+
+		boolean delete_success_true = tokenDAO.removeTokenByPK(tokenPK) == 1;
+		Assert.assertTrue(delete_success_true);
 	}
 
 	private String changeToHash(String password){
