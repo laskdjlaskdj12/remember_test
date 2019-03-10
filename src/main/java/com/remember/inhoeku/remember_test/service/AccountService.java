@@ -3,6 +3,7 @@ package com.remember.inhoeku.remember_test.service;
 import com.remember.inhoeku.remember_test.dao.AccountDAO;
 import com.remember.inhoeku.remember_test.domain.dto.LoginDTO;
 import com.remember.inhoeku.remember_test.domain.dto.RegisterDTO;
+import com.remember.inhoeku.remember_test.domain.enumeration.ACCOUNT_TYPE;
 import com.remember.inhoeku.remember_test.domain.error.BusinessException;
 import com.remember.inhoeku.remember_test.domain.vo.AccountVO;
 import com.remember.inhoeku.remember_test.domain.vo.TokenVO;
@@ -11,6 +12,9 @@ import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 @Service
 public class AccountService {
@@ -77,6 +81,19 @@ public class AccountService {
 
 		//토큰을 저장함
 		return tokenService.saveToken(accountVO, token);
+	}
+
+	public boolean isStillLogin(@NotNull String token, @NotNull int userPK, ACCOUNT_TYPE passenger) {
+		TokenVO tokenVO = tokenService.getTokenByAccountPK(userPK, passenger);
+
+		Date currentDate = new Date();
+		Date expireDate = tokenVO.getExpireDate();
+
+		if(currentDate.compareTo(expireDate) >= 0){
+			return false;
+		}
+
+		return tokenVO.getToken().equals(token);
 	}
 
 	private boolean isLoginElementExsist(LoginDTO loginDTO) {

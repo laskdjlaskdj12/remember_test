@@ -6,6 +6,7 @@ import com.remember.inhoeku.remember_test.domain.enumeration.ACCOUNT_TYPE;
 import com.remember.inhoeku.remember_test.domain.error.BusinessException;
 import com.remember.inhoeku.remember_test.domain.vo.TokenVO;
 import com.remember.inhoeku.remember_test.service.AccountService;
+import com.remember.inhoeku.remember_test.service.TokenService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,12 +14,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class AccountServiceTest {
 
 	@Autowired
 	AccountService accountService;
+
+	@Autowired
+	TokenService tokenService;
 
 	@Test
 	public void registerClientTest() {
@@ -84,6 +93,28 @@ public class AccountServiceTest {
 		Assert.assertTrue(tokenVO.getUpdateDate().getTime() > 0);
 		Assert.assertTrue(tokenVO.getExpireDate().getTime() > 0);
 		Assert.assertTrue(tokenVO.getPK() > 0);
+	}
+
+	@Test
+	public void isStillLoginTest(){
+		TokenVO tokenVO = tokenService.getTokenByAccountPK(6, ACCOUNT_TYPE.PASSENGER);
+		Assert.assertNotNull(tokenVO);
+		Assert.assertNotNull(tokenVO.getToken());
+
+		System.out.println("Token : " + tokenVO.getToken());
+		boolean is_still_login_true = accountService.isStillLogin(tokenVO.getToken(), tokenVO.getClientPK(), ACCOUNT_TYPE.PASSENGER);
+
+		Assert.assertTrue(is_still_login_true);
+	}
+
+	@Test
+	public void dateTimetest() throws ParseException {
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+		Date date = df.parse("2019-03-10 12:10:37");
+		Date date1 = df.parse("2019-03-11 00:10:37");
+
+		Assert.assertTrue(date1.compareTo(date) > 0);
 	}
 
 }
