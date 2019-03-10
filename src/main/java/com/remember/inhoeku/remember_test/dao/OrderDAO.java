@@ -15,12 +15,12 @@ public class OrderDAO {
 	JdbcTemplate jdbcTemplate;
 
 	public int insertOrder(OrderDTO orderDTO, String date){
-		String sql = "INSERT INTO reserveOrder(departure, orderTime, userPK) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO requestOrder(departure, orderTime, userPK) VALUES (?, ?, ?)";
 		return jdbcTemplate.update(sql, orderDTO.getDeparture(), date, orderDTO.getUserPK());
 	}
 
 	public List<OrderVO> getOrderListByUserPK(int userPK) {
-		String sql = "SELECT * FROM reserveOrder where userPK = ? ORDER by PK DESC";
+		String sql = "SELECT * FROM requestOrder where userPK = ? ORDER by PK DESC";
 		return jdbcTemplate.query(sql, new OrderMapper(), userPK);
 	}
 }
