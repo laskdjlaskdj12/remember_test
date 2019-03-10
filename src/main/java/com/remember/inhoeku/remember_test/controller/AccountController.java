@@ -7,15 +7,13 @@ import com.remember.inhoeku.remember_test.domain.vo.DriverTokenVO;
 import com.remember.inhoeku.remember_test.domain.vo.TokenVO;
 import com.remember.inhoeku.remember_test.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/account")
+@CrossOrigin("*")
 public class AccountController {
 
 	@Autowired
