@@ -8,14 +8,13 @@ public enum ACCOUNT_TYPE {
 	DRIVER(1);
 
 	private int value;
-	private String name;
 
 	ACCOUNT_TYPE(int value){
 		this.value = value;
 	}
 
-	public String toJsonValue() {
-		return this.name();
+	public int getValue(){
+		return value;
 	}
 
 	public ACCOUNT_TYPE fromString(String source){
