@@ -65,7 +65,7 @@ public class AccountService {
 		}
 
 		//토큰이 있는지 체크
-		TokenVO tokenVO = tokenService.getTokenByPK(accountVO.getPK(), accountVO.getAccountType());
+		TokenVO tokenVO = tokenService.getTokenByAccountPK(accountVO.getPK(), accountVO.getAccountType());
 
 		if(isTokenExsist(tokenVO)){
 			//토큰을 삭제함

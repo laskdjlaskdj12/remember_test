@@ -40,7 +40,7 @@ public class TokenService {
 		return tokenDAO.getTokenByAccountPK(accountVO.getPK(), accountVO.getAccountType());
 	}
 
-	public TokenVO getTokenByPK(int pk, ACCOUNT_TYPE accountType) {
+	public TokenVO getTokenByAccountPK(int pk, ACCOUNT_TYPE accountType) {
 		return tokenDAO.getTokenByAccountPK(pk, accountType);
 	}
 
