@@ -1,14 +1,14 @@
 package com.remember.inhoeku.remember_test.domain.error;
 
 public class BusinessException extends RuntimeException {
-	private String key;
+	private String errorType;
 	private String message;
 	public BusinessException(String message){
 		this.message = message;
 	}
 
 	public BusinessException(String key, String message){
-		this.key = key;
+		this.errorType = key;
 		this.message = message;
 	}
 
@@ -16,4 +16,6 @@ public class BusinessException extends RuntimeException {
 	public String getMessage() {
 		return message;
 	}
+
+	public String getErrorType(){ return errorType; }
 }

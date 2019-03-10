@@ -31,6 +31,7 @@ public class CustomExceptionHandler {
 		Map<String, Object> map = new HashMap<>();
 		String message = e.getMessage();
 		map.put("Error", message);
+		map.put("ErrorType", e.getErrorType());
 
 		return new ResponseEntity<>(new Gson().toJson(map), status);
 	}
