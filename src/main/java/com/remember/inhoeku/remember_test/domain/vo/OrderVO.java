@@ -8,14 +8,15 @@ import java.util.Date;
 @Data
 public class OrderVO {
 	@NotNull
-	private int PK;
+	private Integer PK;
 
 	@NotNull
-	private int userPK;
+	private Integer userPK;
 
 	@NotNull
 	private String departure;
 
+	//Todo: change to LocalTimeDate
 	@NotNull
 	private Date orderTime;
 }

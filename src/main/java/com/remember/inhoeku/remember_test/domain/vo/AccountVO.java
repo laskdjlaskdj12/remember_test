@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class AccountVO {
 
 	@NotNull
-	private int PK;
+	private Integer PK;
 
 	@NotNull
 	private String email;

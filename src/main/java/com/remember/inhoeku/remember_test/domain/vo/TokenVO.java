@@ -10,19 +10,21 @@ import java.util.Date;
 public class TokenVO {
 
 	@NotNull
-	int PK;
+	Integer PK;
 
+	//Todo: change to LocalTimeDate
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	Date updateDate;
 
+	//Todo: change to LocalTimeDate
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	Date expireDate;
 
-	int clientPK;
+	Integer clientPK;
 
-	int driverPK;
+	Integer driverPK;
 
 	@NotNull
 	String token;

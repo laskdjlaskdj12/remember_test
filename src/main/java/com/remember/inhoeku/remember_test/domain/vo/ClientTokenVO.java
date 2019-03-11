@@ -9,17 +9,19 @@ import java.util.Date;
 @Data
 public class ClientTokenVO {
 	@NotNull
-	int PK;
+	Integer PK;
 
+	//Todo: change to LocalTimeDate
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	Date updateDate;
 
+	//Todo: change to LocalTimeDate
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	Date expireDate;
 
-	int clientPK;
+	Integer clientPK;
 
 	@NotNull
 	String token;
