@@ -41,7 +41,7 @@ public class DispatchRequestDAOTest {
 	}
 
 	@Test
-	public void getDispathRequestByRequestOrderPK(){
+	public void getDispathRequestByRequestOrderPKTest(){
 		int orderPK = 6;
 
 		DispatchRequestVO dispatchRequestVO = dispatchRequestDAO.getRequestOrderByOrderPK(orderPK);
