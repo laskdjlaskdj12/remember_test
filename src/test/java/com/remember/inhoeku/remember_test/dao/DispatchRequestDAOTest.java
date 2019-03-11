@@ -69,10 +69,10 @@ public class DispatchRequestDAOTest {
 		return dispatchRequestVO;
 	}
 
-	private DispatchRequestVO makeReadyOrderMock(){
+	private DispatchRequestVO makeReadyOrderMock(int orderPK){
 		DispatchRequestVO dispatchRequestVO = new DispatchRequestVO();
 		dispatchRequestVO.setOrderState(ORDER_STATE.READY);
-		dispatchRequestVO.setOrderPK(6);
+		dispatchRequestVO.setOrderPK(orderPK);
 
 		return dispatchRequestVO;
 	}
