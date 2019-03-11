@@ -48,7 +48,7 @@ public class DispatchRequestDAOTest {
 	public void getDispatchRequestByRequestOrderPKTest(){
 		int orderPK = 6;
 
-		DispatchRequestVO dispatchRequestVO = dispatchRequestDAO.getRequestOrderByOrderPK(orderPK);
+		DispatchRequestVO dispatchRequestVO = dispatchRequestDAO.getDispatchRequestByOrderPK(orderPK);
 		boolean is_dispatch_requestVO_not_null_true = dispatchRequestVO != null;
 		boolean is_dispatch_request_PK_is_same = dispatchRequestVO.getPK() == 1;
 		boolean is_dispatch_request_orderPK_is_same_true = dispatchRequestVO.getOrderPK() == 6;
