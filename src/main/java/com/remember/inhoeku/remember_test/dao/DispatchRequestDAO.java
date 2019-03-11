@@ -26,7 +26,7 @@ public class DispatchRequestDAO {
 	}
 
 	@Nullable
-	public DispatchRequestVO getRequestOrderByOrderPK(int orderPK) {
+	public DispatchRequestVO getDispatchRequestByOrderPK(int orderPK) {
 		String sql = "SELECT * FROM dispatchRequest WHERE requestOrderPK = ?";
 		List<DispatchRequestVO> dispatchRequestVOS = jdbcTemplate.query(sql, new DispatchRequestMapper(), orderPK);
 
