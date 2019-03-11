@@ -18,7 +18,9 @@ public class DispatchRequestDAOTest {
 
 	@Test
 	public void insertDispatchRequestTest(){
-		DispatchRequestVO dispatchRequestVO = makeReadyOrderMock();
+		//반드시 DispatchRequest 테이블에 orderPK 가 겹치지 않게 할것
+		int orderPK = 7;
+		DispatchRequestVO dispatchRequestVO = makeReadyOrderMock(orderPK);
 		int insertDispatchRequest = dispatchRequestDAO.insertDispathRequest(dispatchRequestVO);
 
 		boolean is_insertDispatchRequest_true = insertDispatchRequest > 0;
@@ -46,7 +48,6 @@ public class DispatchRequestDAOTest {
 
 		DispatchRequestVO dispatchRequestVO = dispatchRequestDAO.getRequestOrderByOrderPK(orderPK);
 		boolean is_dispatch_requestVO_not_null_true = dispatchRequestVO != null;
-
 		boolean is_dispatch_request_PK_is_same = dispatchRequestVO.getPK() == 1;
 		boolean is_dispatch_request_orderPK_is_same_true = dispatchRequestVO.getOrderPK() == 6;
 		boolean is_dispatch_request_state_is_same_true = dispatchRequestVO.getOrderState() == ORDER_STATE.RESERVE;
