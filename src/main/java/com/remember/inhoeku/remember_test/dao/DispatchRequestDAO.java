@@ -4,6 +4,7 @@ import com.remember.inhoeku.remember_test.dao.Mapper.DispatchRequestMapper;
 import com.remember.inhoeku.remember_test.domain.vo.DispatchRequestVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -24,9 +25,14 @@ public class DispatchRequestDAO {
 		return jdbcTemplate.update(sql, dispatchReqeustVO.getOrderPK(), dispatchReqeustVO.getOrderState().getValue(), dispatchReqeustVO.getDispatchPK(), dispatchReqeustVO.getPK());
 	}
 
+	@Nullable
 	public DispatchRequestVO getRequestOrderByOrderPK(int orderPK) {
-		String sql = "SELECT * FROM dispatchRequest where requestOrderPK = ?";
-		List<DispatchRequestVO> dispatchRequestVOList = jdbcTemplate.query(sql, new DispatchRequestMapper(), orderPK);
-		return dispatchRequestVOList.get(0);
+		String sql = "SELECT * FROM dispatchRequest WHERE requestOrderPK = ?";
+		List<DispatchRequestVO> dispatchRequestVOS = jdbcTemplate.query(sql, new DispatchRequestMapper(), orderPK);
+
+		if(dispatchRequestVOS.isEmpty()){
+			return null;
+		}
+		return dispatchRequestVOS.get(0);
 	}
 }
