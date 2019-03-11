@@ -1,7 +1,11 @@
 package com.remember.inhoeku.remember_test.service;
 
+import com.remember.inhoeku.remember_test.dao.DispatchRequestDAO;
 import com.remember.inhoeku.remember_test.dao.OrderDAO;
 import com.remember.inhoeku.remember_test.domain.dto.OrderDTO;
+import com.remember.inhoeku.remember_test.domain.enumeration.ORDER_STATE;
+import com.remember.inhoeku.remember_test.domain.error.BusinessException;
+import com.remember.inhoeku.remember_test.domain.vo.DispatchRequestVO;
 import com.remember.inhoeku.remember_test.domain.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +21,16 @@ public class OrderService {
 	@Autowired
 	OrderDAO orderDAO;
 
+	@Autowired
+	DispatchRequestDAO dispatchRequestDAO;
+
 	public OrderVO order(OrderDTO orderDTO) {
+		String depatureString = orderDTO.getDeparture();
+
+		if(depatureString.length() > 100) {
+			throw new BusinessException("departure", "departure letter is over 100");
+		}
+
 		Date date = new Date();
 		String currentDateString = dateToString(date);
 

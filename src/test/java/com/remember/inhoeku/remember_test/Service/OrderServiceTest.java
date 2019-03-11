@@ -1,6 +1,7 @@
 package com.remember.inhoeku.remember_test.Service;
 
 import com.remember.inhoeku.remember_test.domain.dto.OrderDTO;
+import com.remember.inhoeku.remember_test.domain.error.BusinessException;
 import com.remember.inhoeku.remember_test.domain.vo.OrderVO;
 import com.remember.inhoeku.remember_test.service.OrderService;
 import org.junit.Assert;
@@ -25,5 +26,16 @@ public class OrderServiceTest {
 
 		Assert.assertNotNull(orderVO);
 		Assert.assertEquals(4, orderVO.getPK().intValue());
+	}
+
+	@Test(expected = BusinessException.class)
+	public void overOrderDepartureTextTest() throws BusinessException {
+		String orderString = "서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동 서울시 노원구 공릉동";
+		System.out.println("orderStringSize : " + orderString.length());
+
+		OrderDTO orderDTO = new OrderDTO();
+		orderDTO.setDeparture(orderString);
+
+		orderService.order(orderDTO);
 	}
 }
