@@ -44,7 +44,28 @@ public class OrderService {
 			return null;
 		}
 
-		return orderVOList.get(0);
+		OrderVO orderVO = orderVOList.get(0);
+
+		//DispatchRequstList에 넣음
+		DispatchRequestVO dispatchRequestVO = makeDispatchRequest(orderVO);
+		int insertComplete = dispatchRequestDAO.insertDispathRequest(dispatchRequestVO);
+
+		if(isDispatchRequestInsertSuccess(insertComplete)){
+			throw new RuntimeException("insert dispatch Request Fail");
+		}
+
+		return orderVO;
+	}
+
+	private boolean isDispatchRequestInsertSuccess(int insertComplete) {
+		return insertComplete > 0;
+	}
+
+	private DispatchRequestVO makeDispatchRequest(OrderVO orderVO) {
+		DispatchRequestVO dispatchRequestVO = new DispatchRequestVO();
+		dispatchRequestVO.setOrderPK(orderVO.getPK());
+		dispatchRequestVO.setOrderState(ORDER_STATE.READY);
+		return dispatchRequestVO;
 	}
 
 	private String dateToString(Date date){

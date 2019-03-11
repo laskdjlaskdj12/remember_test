@@ -20,7 +20,7 @@ public class OrderServiceTest {
 	@Test
 	public void orderTest(){
 		OrderDTO orderDTO = new OrderDTO();
-		orderDTO.setDeparture("서울시 노원구 공릉동");
+		orderDTO.setDeparture("서울시 노원구 공릉동 134");
 		orderDTO.setUserPK(6);
 		OrderVO orderVO = orderService.order(orderDTO);
 
