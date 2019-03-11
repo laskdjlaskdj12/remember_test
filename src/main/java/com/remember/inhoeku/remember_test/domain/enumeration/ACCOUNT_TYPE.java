@@ -12,17 +12,4 @@ public enum ACCOUNT_TYPE {
 	ACCOUNT_TYPE(int value){
 		this.value = value;
 	}
-
-	public int getValue(){
-		return value;
-	}
-
-	public ACCOUNT_TYPE fromString(String source){
-		for (ACCOUNT_TYPE e : values()){
-			if (e.name().toUpperCase().equals(source.toUpperCase())) {
-				return e;
-			}
-		}
-		return null;
-	}
 }
