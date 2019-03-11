@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class DispatchRequestDAOTest {
@@ -58,6 +60,15 @@ public class DispatchRequestDAOTest {
 		Assert.assertTrue(is_dispatch_request_orderPK_is_same_true);
 		Assert.assertTrue(is_dispatch_request_state_is_same_true);
 		Assert.assertTrue(is_dispatch_request_dispatch_pk_is_same_true);
+	}
+
+	@Test
+	public void getAllDispatchRequest(){
+		List<DispatchRequestVO> dispatchRequestVOList = dispatchRequestDAO.getAllDispatchRequest();
+
+		boolean is_dispatch_request_list_size_over_1_true = dispatchRequestVOList.size() > 0;
+
+		Assert.assertTrue(is_dispatch_request_list_size_over_1_true);
 	}
 
 	private DispatchRequestVO makeUpdateDispatchRequestMock(int dispatchRequestPK, int orderPK, int dispatchPK) {

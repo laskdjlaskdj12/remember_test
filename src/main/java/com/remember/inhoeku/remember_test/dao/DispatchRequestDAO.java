@@ -35,4 +35,9 @@ public class DispatchRequestDAO {
 		}
 		return dispatchRequestVOS.get(0);
 	}
+
+	public List<DispatchRequestVO> getAllDispatchRequest() {
+		String sql = "SELECT * FROM dispatchRequest ORDER BY PK DESC";
+		return jdbcTemplate.query(sql, new DispatchRequestMapper());
+	}
 }
