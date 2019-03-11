@@ -24,6 +24,6 @@ public class OrderServiceTest {
 		OrderVO orderVO = orderService.order(orderDTO);
 
 		Assert.assertNotNull(orderVO);
-		Assert.assertEquals(4, orderVO.getPK());
+		Assert.assertEquals(4, orderVO.getPK().intValue());
 	}
 }
