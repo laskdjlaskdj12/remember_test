@@ -43,7 +43,13 @@ public class AccountService {
 			throw new RuntimeException("Email register Fail");
 		}
 
-		 return accountDAO.getAccountByEmail(registerDTO.getEmail()).getPK();
+		AccountVO accountVO = accountDAO.getAccountByEmail(registerDTO.getEmail());
+
+		if(accountVO == null){
+			throw new RuntimeException("Can't find Reigster Account Email");
+		}
+
+		 return accountVO.getPK();
 	}
 
 	public TokenVO login(LoginDTO loginDTO) {
