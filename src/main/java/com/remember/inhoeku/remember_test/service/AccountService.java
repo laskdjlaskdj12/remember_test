@@ -31,7 +31,7 @@ public class AccountService {
 
 		// 이메일 체크
 		if (isEmailExsist(registerDTO)) {
-			throw new BusinessException("Email is Exsist");
+			throw new BusinessException("Eamil", "Email is Exsist");
 		}
 
 		//패스워드 change
@@ -40,7 +40,7 @@ public class AccountService {
 
 		//register
 		if (accountDAO.register(registerDTO) == 0) {
-			throw new RuntimeException("Email registerFail");
+			throw new RuntimeException("Email register Fail");
 		}
 
 		 return accountDAO.getAccountByEmail(registerDTO.getEmail()).getPK();
