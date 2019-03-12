@@ -7,6 +7,7 @@ import com.remember.inhoeku.remember_test.domain.vo.TokenVO;
 import org.bouncycastle.jcajce.provider.digest.SHA3;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.text.DateFormat;
@@ -28,6 +29,7 @@ public class TokenService {
 		return changeToHash(hashBaseString);
 	}
 
+	@Nullable
 	public TokenVO saveToken(AccountVO accountVO, String token) {
 		Date date = new Date();
 		Date expireDate = makeExpiredate(date);
@@ -37,7 +39,13 @@ public class TokenService {
 
 		tokenDAO.insertToken(accountVO, token, currentDateString, expireDateString);
 
-		return tokenDAO.getTokenByAccountPK(accountVO.getPK(), accountVO.getAccountType());
+		TokenVO tokenVO = tokenDAO.getTokenByAccountPK(accountVO.getPK(), accountVO.getAccountType());
+
+		if(tokenVO == null){
+			throw new RuntimeException("Can't find Insert Token");
+		}
+
+		return tokenVO;
 	}
 
 	public TokenVO getTokenByAccountPK(int pk, ACCOUNT_TYPE accountType) {
