@@ -19,6 +19,17 @@ public class OrderDAO {
 		return jdbcTemplate.update(sql, orderDTO.getDeparture(), date, orderDTO.getUserPK());
 	}
 
+	public OrderVO getOrderByPK(int PK){
+		String sql = "SELECT * FROM requestOrder where PK = ?";
+		List<OrderVO> orderVOS = jdbcTemplate.query(sql, new OrderMapper(), PK);
+
+		if(orderVOS.isEmpty()){
+			return null;
+		}
+
+		return orderVOS.get(0);
+	}
+
 	public List<OrderVO> getOrderListByUserPK(int userPK) {
 		String sql = "SELECT * FROM requestOrder where userPK = ? ORDER by PK DESC";
 		return jdbcTemplate.query(sql, new OrderMapper(), userPK);

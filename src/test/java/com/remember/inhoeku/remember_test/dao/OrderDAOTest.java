@@ -35,6 +35,15 @@ public class OrderDAOTest {
 	}
 
 	@Test
+	public void getOrderByPK(){
+		OrderVO orderVO = orderDAO.getOrderByPK(4);
+
+		boolean is_order_not_null = orderVO != null;
+
+		Assert.assertTrue(is_order_not_null);
+	}
+
+	@Test
 	public void getOrderVOList(){
 		int userPK = 6;
 		List<OrderVO> orderVOList = orderDAO.getOrderListByUserPK(userPK);
