@@ -24,7 +24,7 @@ public class DispatchService {
 	DispatchRequestDAO dispatchRequestDAO;
 
 	public OrderVO request(OrderVO orderVO){
-		//DispatchRequstList에 넣음
+		//DispatchRequst에 넣음
 		DispatchRequestVO dispatchRequestVO = makeDispatchRequest(orderVO);
 		int insertComplete = dispatchRequestDAO.insertDispathRequest(dispatchRequestVO);
 
