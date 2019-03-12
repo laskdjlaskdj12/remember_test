@@ -60,9 +60,17 @@ public class ListService {
 	private DispatchAcceptVO loadDispatchAcceptVO(DispatchRequestVO dispatchRequestVO) {
 		Integer dispatchAcceptPK = dispatchRequestVO.getDispatchPK();
 		DispatchAcceptVO dispatchAcceptVO = null;
-		if(dispatchAcceptPK != -1){
-			dispatchAcceptVO = dispatchAcceptDAO.getDispatchAcceptByPK(dispatchAcceptPK);
+
+		if(dispatchAcceptPK == -1){
+			return dispatchAcceptVO;
 		}
+
+		dispatchAcceptVO = dispatchAcceptDAO.getDispatchAcceptByPK(dispatchAcceptPK);
+
+		if(dispatchAcceptVO == null){
+			throw new RuntimeException("Can't find Dispatch dispatchAccept VO");
+		}
+
 		return dispatchAcceptVO;
 	}
 

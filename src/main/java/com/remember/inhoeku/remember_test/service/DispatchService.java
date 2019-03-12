@@ -44,6 +44,11 @@ public class DispatchService {
 		}
 
 		DispatchAcceptVO dispatchAcceptVO = dispatchAcceptDAO.getDispatchAcceptByOrderPK(dispatchAcceptDTO.getOrderPK());
+
+		if(dispatchAcceptVO == null){
+			throw new RuntimeException("Can not find inserted dispatchAccept");
+		}
+
 		DispatchRequestVO dispatchRequestVO = matchToDispatchRequest(dispatchAcceptVO);
 		return dispatchRequestDAO.updateDispatchRequest(dispatchRequestVO);
 	}
