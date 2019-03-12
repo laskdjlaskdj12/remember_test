@@ -32,4 +32,16 @@ public class DispatchAcceptDAO {
 
 		return dispatchAcceptVOList.get(0);
 	}
+
+	@Nullable
+	public DispatchAcceptVO getDispatchAcceptByPK(Integer PK){
+		String sql = "SELECT * FROM dispatchAccept WHERE PK = ?";
+		List<DispatchAcceptVO> dispatchAcceptVOList = jdbcTemplate.query(sql, new DispatchAcceptMapper(), PK);
+
+		if(dispatchAcceptVOList.isEmpty()){
+			return null;
+		}
+
+		return dispatchAcceptVOList.get(0);
+	}
 }
