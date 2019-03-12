@@ -74,6 +74,7 @@ public class ListService {
 		return dispatchAcceptVO;
 	}
 
+	@Nullable
 	private OrderVO loadOrderVO(DispatchRequestVO dispatchRequestVO) {
 		Integer orderPK = dispatchRequestVO.getOrderPK();
 		return orderDAO.getOrderByPK(orderPK);
