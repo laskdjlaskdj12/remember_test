@@ -13,5 +13,5 @@ public class DispatchAcceptDTO implements SessionDTO{
 	Integer driverPK;
 
 	@NotNull
-	String Token;
+	String token;
 }
