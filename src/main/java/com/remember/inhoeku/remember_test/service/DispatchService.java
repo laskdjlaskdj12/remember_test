@@ -4,6 +4,7 @@ import com.remember.inhoeku.remember_test.dao.DispatchAcceptDAO;
 import com.remember.inhoeku.remember_test.dao.DispatchRequestDAO;
 import com.remember.inhoeku.remember_test.domain.dto.DispatchAcceptDTO;
 import com.remember.inhoeku.remember_test.domain.enumeration.ORDER_STATE;
+import com.remember.inhoeku.remember_test.domain.error.BusinessException;
 import com.remember.inhoeku.remember_test.domain.vo.DispatchAcceptVO;
 import com.remember.inhoeku.remember_test.domain.vo.DispatchRequestVO;
 import com.remember.inhoeku.remember_test.domain.vo.OrderVO;
@@ -37,6 +38,14 @@ public class DispatchService {
 
 	public int accept(DispatchAcceptDTO dispatchAcceptDTO) {
 		String dateString = makeDateString(new Date());
+
+		Integer orderPK = dispatchAcceptDTO.getOrderPK();
+		DispatchRequestVO dispatchRequestVO = dispatchRequestDAO.getDispatchRequestByOrderPK(orderPK);
+
+		if(dispatchRequestVO == null){
+			throw new BusinessException("Order", "Accept Order is not Valid");
+		}
+
 		int insertResult = dispatchAcceptDAO.insertDispatchAccept(dispatchAcceptDTO, dateString);
 
 		if(insertResult == 0){
@@ -49,7 +58,7 @@ public class DispatchService {
 			throw new RuntimeException("Can not find inserted dispatchAccept");
 		}
 
-		DispatchRequestVO dispatchRequestVO = matchToDispatchRequest(dispatchAcceptVO);
+		matchToDispatchRequest(dispatchRequestVO, dispatchAcceptVO);
 		return dispatchRequestDAO.updateDispatchRequest(dispatchRequestVO);
 	}
 
@@ -64,11 +73,9 @@ public class DispatchService {
 		return dispatchRequestVO;
 	}
 
-	private DispatchRequestVO matchToDispatchRequest(DispatchAcceptVO dispatchAcceptVO) {
-		DispatchRequestVO dispatchRequestVO = dispatchRequestDAO.getDispatchRequestByOrderPK(dispatchAcceptVO.getOrderPK());
+	private void matchToDispatchRequest(DispatchRequestVO dispatchRequestVO, DispatchAcceptVO dispatchAcceptVO) {
 		dispatchRequestVO.setDispatchPK(dispatchAcceptVO.getPK());
 		dispatchRequestVO.setOrderState(ORDER_STATE.RESERVE);
-		return dispatchRequestVO;
 	}
 
 	private String makeDateString(Date date){
