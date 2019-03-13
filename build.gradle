@@ -35,3 +35,7 @@ dependencies {
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
     compile group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.60'
 }
+
+jar{
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
