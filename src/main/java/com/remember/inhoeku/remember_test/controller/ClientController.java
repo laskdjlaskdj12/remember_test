@@ -22,7 +22,7 @@ public class ClientController {
 	@Autowired
 	AccountService accountService;
 
-	@PostMapping("/order/")
+	@PostMapping("/order")
 	public OrderVO orderTaxi(@RequestBody @Valid OrderDTO orderDTO){
 		if(!accountService.isStillLogin(orderDTO.getToken(), orderDTO.getUserPK(), ACCOUNT_TYPE.PASSENGER)){
 			throw new BusinessException("Login", "Token is Invalid");
