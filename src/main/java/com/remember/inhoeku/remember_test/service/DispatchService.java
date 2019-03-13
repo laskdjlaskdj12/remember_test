@@ -36,7 +36,7 @@ public class DispatchService {
 		return orderVO;
 	}
 
-	public int accept(DispatchAcceptDTO dispatchAcceptDTO) {
+	public DispatchAcceptVO accept(DispatchAcceptDTO dispatchAcceptDTO) {
 		String dateString = makeDateString(new Date());
 
 		Integer orderPK = dispatchAcceptDTO.getOrderPK();
@@ -59,7 +59,13 @@ public class DispatchService {
 		}
 
 		matchToDispatchRequest(dispatchRequestVO, dispatchAcceptVO);
-		return dispatchRequestDAO.updateDispatchRequest(dispatchRequestVO);
+		int updateResult = dispatchRequestDAO.updateDispatchRequest(dispatchRequestVO);
+
+		if(updateResult == 0){
+			throw new RuntimeException("Can't update dispatchAcceptVO To DB");
+		}
+
+		return dispatchAcceptVO;
 	}
 
 	private boolean isDispatchRequestInsertSuccess(int insertComplete) {
