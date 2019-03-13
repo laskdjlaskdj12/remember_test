@@ -56,18 +56,14 @@ public class AccountService {
 		AccountDAO accountDAO = accountDAOFactory.getDAO(loginDTO.getAccountType());
 
 		if(!isLoginElementExsist(loginDTO)){
-			throw new BusinessException("login Element is not exsist");
+			throw new BusinessException("Wrong Parameter", "login Element is not exsist");
 		}
 
 		//Account가 있는지 확인
 		AccountVO accountVO = accountDAO.getAccountByEmail(loginDTO.getEmail());
 
-		if(accountVO == null){
-			System.out.println("Account가 null입니다.");
-		}
-
 		if(!isAccountExsist(accountVO)){
-			throw new BusinessException("No Such Account");
+			throw new BusinessException("Account", "No Such Account");
 		}
 
 		if(!isPasswordSame(loginDTO, accountVO)){
