@@ -2,6 +2,7 @@ package com.remember.inhoeku.remember_test.Service;
 
 import com.remember.inhoeku.remember_test.dao.OrderDAO;
 import com.remember.inhoeku.remember_test.domain.dto.DispatchAcceptDTO;
+import com.remember.inhoeku.remember_test.domain.vo.DispatchAcceptVO;
 import com.remember.inhoeku.remember_test.domain.vo.OrderVO;
 import com.remember.inhoeku.remember_test.service.DispatchService;
 import org.junit.Assert;
@@ -32,11 +33,11 @@ public class DispatchServiceTest {
 	public void dispatchAcceptTest(){
 		DispatchAcceptDTO dispatchAcceptDTO = makeDispatchAcceptDTOMock();
 
-		int success_update_row_count = dispatchService.accept(dispatchAcceptDTO);
+		DispatchAcceptVO dispatchAcceptVO = dispatchService.accept(dispatchAcceptDTO);
 
-		boolean is_update_success_by_1_true = success_update_row_count == 1;
+		boolean is_dispatchAccept_not_null_true = dispatchAcceptVO != null;
 
-		Assert.assertTrue(is_update_success_by_1_true);
+		Assert.assertTrue(is_dispatchAccept_not_null_true);
 	}
 
 	private DispatchAcceptDTO makeDispatchAcceptDTOMock() {
