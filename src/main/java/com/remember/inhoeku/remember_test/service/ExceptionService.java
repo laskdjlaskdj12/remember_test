@@ -59,7 +59,6 @@ public class ExceptionService {
 	}
 
 	public void saveFile(String errorString, String reportFileName) {
-		System.out.println(errorString);
 		File file = new File(String.format(reportFileName));
 		try {
 			final FileWriter fileWriter = new FileWriter(file);
