@@ -2,7 +2,6 @@ package com.remember.inhoeku.remember_test.service;
 
 import com.google.gson.Gson;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.Cookie;
@@ -10,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -17,8 +18,13 @@ import java.util.*;
 @Service
 public class ExceptionService {
 
-	@Value("${exceptiondirectory}")
-	private String saveLoation;
+	final private String logFilePath;
+
+	public ExceptionService(){
+		Path currentRelativePath = Paths.get("");
+		String currentFileDir = currentRelativePath.toAbsolutePath().toString();
+		logFilePath = currentFileDir + "/log";
+	}
 
 	public void saveReportFile(HttpServletRequest request, Throwable throwable) {
 		Map<String, String> headers = getHeaders(request);
@@ -30,14 +36,14 @@ public class ExceptionService {
 		String queryString = request.getQueryString();
 
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append("URL : " + URL);
-		stringBuilder.append("URI : " + URI);
-		stringBuilder.append("remoteHost : " + remoteHost);
-		stringBuilder.append("Cookie : " + new Gson().toJson(cookies));
-		stringBuilder.append("method : " + method);
-		stringBuilder.append("queryString : " + queryString);
-		stringBuilder.append("headers : " + new Gson().toJson(headers));
-		stringBuilder.append("error message : " + throwable.getMessage());
+		stringBuilder.append("URL : " + URL + "\n");
+		stringBuilder.append("URI : " + URI + "\n");
+		stringBuilder.append("remoteHost : " + remoteHost + "\n");
+		stringBuilder.append("Cookie : " + new Gson().toJson(cookies) + "\n");
+		stringBuilder.append("method : " + method + "\n");
+		stringBuilder.append("queryString : " + queryString + "\n");
+		stringBuilder.append("headers : " + new Gson().toJson(headers) + "\n");
+		stringBuilder.append("error message : " + throwable.getMessage() + "\n");
 		stringBuilder.append("stack Tracke : " + getExceptionStackTrace(throwable, 3));
 
 		String reportFileName = makeReportFileName();
@@ -49,14 +55,16 @@ public class ExceptionService {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String time = df.format(new Date());
 
-		return saveLoation + "/" + time + ".txt";
+		return logFilePath + "/" + time + ".txt";
 	}
 
 	public void saveFile(String errorString, String reportFileName) {
+		System.out.println(errorString);
 		File file = new File(String.format(reportFileName));
 		try {
-			FileWriter fileWriter = new FileWriter(file);
+			final FileWriter fileWriter = new FileWriter(file);
 			fileWriter.write(errorString);
+			fileWriter.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
