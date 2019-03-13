@@ -9,12 +9,12 @@ import java.util.TimeZone;
 @SpringBootApplication
 public class RememberTestApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(RememberTestApplication.class, args);
-	}
-
 	@PostConstruct
 	public void initApplication() {
 		TimeZone.setDefault(TimeZone.getTimeZone("Asia/Seoul"));
+	}
+
+	public static void main(String[] args) {
+		SpringApplication.run(RememberTestApplication.class, args);
 	}
 }
