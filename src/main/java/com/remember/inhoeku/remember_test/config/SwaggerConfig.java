@@ -15,7 +15,7 @@ public class SwaggerConfig {
 	public Docket api(){
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.teamstartupcentral.laskdjlaskdj12.hompage.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.remember.inhoeku.remember_test.controller"))
 				.paths(PathSelectors.any())
 				.build();
 	}
