@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 public class LoginDTO {
 
 	@NotNull
-	private String Email;
+	private String email;
 
 	@NotNull
 	private String password;
