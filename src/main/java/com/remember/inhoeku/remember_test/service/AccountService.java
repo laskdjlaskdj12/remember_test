@@ -30,8 +30,8 @@ public class AccountService {
 		AccountDAO accountDAO = accountDAOFactory.getDAO(registerDTO.getAccountType());
 
 		// 이메일 체크
-		if (isEmailExsist(registerDTO)) {
-			throw new BusinessException("Eamil", "Email is Exsist");
+		if (isEmailExist(registerDTO)) {
+			throw new BusinessException("Eamil", "Email is Exist");
 		}
 
 		//패스워드 change
@@ -55,14 +55,14 @@ public class AccountService {
 	public TokenVO login(LoginDTO loginDTO) {
 		AccountDAO accountDAO = accountDAOFactory.getDAO(loginDTO.getAccountType());
 
-		if(!isLoginElementExsist(loginDTO)){
-			throw new BusinessException("Wrong Parameter", "login Element is not exsist");
+		if(!isLoginElementExist(loginDTO)){
+			throw new BusinessException("Wrong Parameter", "login Element is not exist");
 		}
 
 		//Account가 있는지 확인
 		AccountVO accountVO = accountDAO.getAccountByEmail(loginDTO.getEmail());
 
-		if(!isAccountExsist(accountVO)){
+		if(!isAccountExist(accountVO)){
 			throw new BusinessException("Account", "No Such Account");
 		}
 
@@ -73,7 +73,7 @@ public class AccountService {
 		//토큰이 있는지 체크
 		TokenVO tokenVO = tokenService.getTokenByAccountPK(accountVO.getPK(), accountVO.getAccountType());
 
-		if(isTokenExsist(tokenVO)){
+		if(isTokenExist(tokenVO)){
 			//토큰을 삭제함
 			tokenService.removeTokenByPK(tokenVO.getPK());
 		}
@@ -98,13 +98,13 @@ public class AccountService {
 		return tokenVO.getToken().equals(token);
 	}
 
-	private boolean isLoginElementExsist(LoginDTO loginDTO) {
+	private boolean isLoginElementExist(LoginDTO loginDTO) {
 		return loginDTO.getEmail() != null
 				&& loginDTO.getPassword() != null
 				&& loginDTO.getAccountType() != null;
 	}
 
-	private boolean isTokenExsist(TokenVO tokenVO) {
+	private boolean isTokenExist(TokenVO tokenVO) {
 		return tokenVO != null;
 	}
 
@@ -113,11 +113,11 @@ public class AccountService {
 		return accountVO.getPassword().equals(passwordHash);
 	}
 
-	private boolean isAccountExsist(AccountVO accountVO) {
+	private boolean isAccountExist(AccountVO accountVO) {
 		return accountVO != null;
 	}
 
-	private boolean isEmailExsist(RegisterDTO registerDTO) {
+	private boolean isEmailExist(RegisterDTO registerDTO) {
 		AccountDAO accountDAO = accountDAOFactory.getDAO(registerDTO.getAccountType());
 
 		AccountVO accountVO;

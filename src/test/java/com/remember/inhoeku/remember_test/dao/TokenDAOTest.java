@@ -48,20 +48,20 @@ public class TokenDAOTest {
 		TokenVO tokenVO = tokenDAO.getTokenByAccountPK(5, accountVO.getAccountType());
 		Assert.assertNotNull(tokenVO);
 
-		boolean clinet_pk_same_true = accountVO.getPK() == tokenVO.getClientPK();
-		boolean hash_is_exsist_true = !tokenVO.getToken().isEmpty();
-		boolean startDate_is_exsist_true = tokenVO.getUpdateDate().getTime() > 0;
-		boolean expireDate_is_exsist_true = tokenVO.getExpireDate().getTime() > 0;
+		boolean client_pk_same_true = accountVO.getPK() == tokenVO.getClientPK();
+		boolean hash_is_exist_true = !tokenVO.getToken().isEmpty();
+		boolean startDate_is_exist_true = tokenVO.getUpdateDate().getTime() > 0;
+		boolean expireDate_is_exist_true = tokenVO.getExpireDate().getTime() > 0;
 
 
-		Assert.assertTrue(clinet_pk_same_true);
-		Assert.assertTrue(hash_is_exsist_true);
-		Assert.assertTrue(startDate_is_exsist_true);
-		Assert.assertTrue(expireDate_is_exsist_true);
+		Assert.assertTrue(client_pk_same_true);
+		Assert.assertTrue(hash_is_exist_true);
+		Assert.assertTrue(startDate_is_exist_true);
+		Assert.assertTrue(expireDate_is_exist_true);
 	}
 
 	@Test
-	public void getTokenNotExsistPK() {
+	public void getTokenNotExistPK() {
 		//반드시 Account PK가 clientAccount 테이블에 없어야할것
 
 		int testAccountPK = 4;

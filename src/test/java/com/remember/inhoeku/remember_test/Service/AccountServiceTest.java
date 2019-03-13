@@ -54,7 +54,7 @@ public class AccountServiceTest {
 	}
 
 	@Test(expected = BusinessException.class)
-	public void registerClientExsistFailTest() throws BusinessException{
+	public void registerClientExistFailTest() throws BusinessException{
 		RegisterDTO clientRegisterDTO = new RegisterDTO();
 		clientRegisterDTO.setEmail("laskdjlaskdj1234@naver.com");
 		clientRegisterDTO.setAccountType(ACCOUNT_TYPE.PASSENGER);
@@ -66,7 +66,7 @@ public class AccountServiceTest {
 	}
 
 	@Test(expected = BusinessException.class)
-	public void registerDriverExsistFailTest() throws BusinessException{
+	public void registerDriverExistFailTest() throws BusinessException{
 		RegisterDTO driverRegisterDTO = new RegisterDTO();
 		driverRegisterDTO.setEmail("laskdjlaskdj1234@naver.com");
 		driverRegisterDTO.setAccountType(ACCOUNT_TYPE.DRIVER);
