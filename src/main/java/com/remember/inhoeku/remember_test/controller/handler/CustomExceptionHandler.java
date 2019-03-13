@@ -39,7 +39,9 @@ public class CustomExceptionHandler {
 	@ExceptionHandler(value = Exception.class)
 	public ResponseEntity<String> exception(HttpServletRequest request, HttpServletResponse response, HttpSession session, Throwable throwable) {
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		System.out.println("Generate Report File");
 		exceptionService.saveReportFile(request, throwable);
+		System.out.println("Generate Report File Success");
 
 		return new ResponseEntity<>(status);
 	}
