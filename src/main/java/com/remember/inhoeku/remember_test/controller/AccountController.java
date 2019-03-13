@@ -19,7 +19,7 @@ public class AccountController {
 	@Autowired
 	AccountService accountService;
 
-	@PostMapping("/register/")
+	@PostMapping("/register")
 	public int register(@RequestBody @Valid RegisterDTO registerDTO){
 		return accountService.register(registerDTO);
 	}
