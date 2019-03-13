@@ -24,6 +24,7 @@ public class ExceptionTestController {
 
 	@GetMapping("/runtime")
 	public void runtimeException(){
+		System.out.println("Emit Runtime Exception");
 		throw new RuntimeException("This is Runtime Exception");
 	}
 
