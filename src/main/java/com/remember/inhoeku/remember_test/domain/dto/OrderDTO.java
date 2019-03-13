@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class OrderDTO implements SessionDTO {
 	@NotNull
-	private int userPK;
+	private Integer userPK;
 
 	@NotNull
 	private String token;
