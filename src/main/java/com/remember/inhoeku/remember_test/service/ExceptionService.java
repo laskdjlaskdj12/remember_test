@@ -48,7 +48,9 @@ public class ExceptionService {
 
 		String reportFileName = makeReportFileName();
 
+		System.out.println("Save File");
 		saveFile(stringBuilder.toString(), reportFileName);
+		System.out.println("Save File Success");
 	}
 
 	public String makeReportFileName(){
