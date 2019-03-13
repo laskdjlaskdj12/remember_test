@@ -23,8 +23,6 @@ jar{
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
 }
 
-
-출처: https://ink1234.tistory.com/12 [laskdjlaskdj12]
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
