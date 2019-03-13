@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @ControllerAdvice
-@Order(HandlerConstants.PRIORITY_LOWER)
+@Order(HandlerConstants.PRIORITY_HIGHER)
 public class CustomExceptionHandler {
 	@Autowired
 	ExceptionService exceptionService;
